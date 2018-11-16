@@ -1,0 +1,99 @@
+
+<h2>SEO Analyser</h2>
+<input type="text" id="SearchTextInput" class="form-control" rows="5" height="100" />
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="stopword">
+    <label class="form-check-label" for="stopword">
+        filters out stop-words
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="eachword">
+    <label class="form-check-label" for="eachword">
+        number of occurrences on the page of each word
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="metatag">
+    <label class="form-check-label" for="metatag">
+        number of occurrences on the page of each word listed in meta tags
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="externallink">
+    <label class="form-check-label" for="externallink">
+        number of external links in the text
+    </label>
+</div>
+
+<button type="submit" (click)="SearchText()" class="btn btn-primary">Search</button>
+
+<ul class="nav nav-tabs" id="TableTab" role="tablist">
+    <li class="nav-item">
+        <a (click)="showWordOccurance()" class="nav-link active" id="WordOccuranceTab" data-toggle="tab" href="#WordOccuranceTable" role="tab" aria-controls="WordOccuranceTable" aria-selected="true">Word Occurance</a>
+    </li>
+    <li class="nav-item">
+        <a (click)="showMetaTag()" class="nav-link" id="MetaTagTab" data-toggle="tab" href="#MetaTagTable" role="tab" aria-controls="MetaTagTable" aria-selected="false">Meta Tag</a>
+    </li>
+    <li class="nav-item">
+        <a (click)="showExternalLink()" class="nav-link" id="ExternalLinkTab" data-toggle="tab" href="#ExternalLinkTable" role="tab" aria-controls="ExternalLinkTable" aria-selected="false">External Link</a>
+    </li>
+</ul>
+<div class="tab-content" id="TableTabContent">
+    <div *ngIf="ShowWO"  class="tab-pane fade show active" id="WordOccuranceTable" role="tabpanel" aria-labelledby="WordOccuranceTab">
+        <p *ngIf="!wordOccurs"><em>No Data Available</em></p>
+
+        <table class='table' *ngIf="wordOccurs" id="WordOccuranceTable">
+            <thead>
+                <tr>
+                    <th>Word </th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let wordOccur of wordOccurs">
+                    <td>{{ wordOccur.word }}</td>
+                    <td>{{ wordOccur.count }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div  *ngIf="ShowMT" class="tab-pane fade" id="MetaTagTable" role="tabpanel" aria-labelledby="MetaTagTab">
+        <p *ngIf="!metaTags"><em>No Data Available</em></p>
+
+        <table class='table' *ngIf="metaTags" id="MetaTagTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Content</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let metaTag of metaTags">
+                    <td>{{ metaTag.name }}</td>
+                    <td>{{ metaTag.content }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="ShowEL" class="tab-pane fade" id="ExternalLinkTable" role="tabpanel" aria-labelledby="ExternalLinkTab">
+        <p *ngIf="!externalLinks"><em>No Data Available</em></p>
+
+        <table class='table' *ngIf="externalLinks" id="ExternalLinkTable">
+            <thead>
+                <tr>
+                    <th>Name </th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let externalLink of externalLinks">
+                    <td>{{ externalLink.name }}</td>
+                    <td>{{ externalLink.link }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
