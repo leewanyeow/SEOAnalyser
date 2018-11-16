@@ -12,5 +12,4 @@ Build on .NET Core 2.0, Angular
 3. Click on "Search" button
 
 4. result will be shown by clicking the Tab : Word Occurance / Meta Tag / External Link.
-    * result shown is based on the option 2a-d.
  
